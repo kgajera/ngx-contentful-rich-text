@@ -18,7 +18,7 @@ yarn add ngx-contentful-rich-text
 
 ## Usage
 
-Import the `NgxContentfulRichTextModule` in your module:
+Import `NgxContentfulRichTextModule` in your module:
 
 ```typescript
 import { NgxContentfulRichTextModule } from 'ngx-contentful-rich-text';
@@ -29,7 +29,7 @@ import { NgxContentfulRichTextModule } from 'ngx-contentful-rich-text';
 export class AppModule {}
 ```
 
-Use `<ngx-contentful-rich-text>` in your component template:
+Use `NgxContentfulRichTextComponent` in your template with the `document` input:
 
 ```typescript
 import { Component } from '@angular/core';
