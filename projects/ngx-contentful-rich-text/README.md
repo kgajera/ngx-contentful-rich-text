@@ -36,8 +36,9 @@ import { Component } from '@angular/core';
 import { Document } from '@contentful/rich-text-types';
 
 @Component({
+  selector: 'app-root',
   template: `
-    <ngx-contentful-rich-text [document]="document"> </ngx-contentful-rich-text>
+    <ngx-contentful-rich-text [document]="document"></ngx-contentful-rich-text>
   `,
 })
 export class AppComponent {
@@ -89,6 +90,7 @@ export class CustomBoldComponent extends MarkRenderer {}
 export class CustomParagraphComponent extends NodeRenderer {}
 
 @Component({
+  selector: 'app-root',
   template: `
     <ngx-contentful-rich-text
       [document]="document"
@@ -146,6 +148,7 @@ export class CustomEmbeddedEntryComponent extends NodeRenderer implements OnInit
 }
 
 @Component({
+  selector: 'app-root',
   template: `
     <ngx-contentful-rich-text
       [document]="document"
