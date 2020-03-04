@@ -19,7 +19,7 @@ export class NodeRendererHostDirective implements OnInit {
 
   constructor(
     private viewContainerRef: ViewContainerRef,
-    private componentRendererService: ComponentRendererService,
+    private componentRenderer: ComponentRendererService,
     private rendererProvider: RendererProviderService
   ) {}
 
@@ -27,7 +27,7 @@ export class NodeRendererHostDirective implements OnInit {
     const component: Type<NodeRenderer> = this.rendererProvider.getNodeRenderer(
       this.node.nodeType
     );
-    this.componentRendererService.render(
+    this.componentRenderer.render(
       this.viewContainerRef,
       component,
       this.node

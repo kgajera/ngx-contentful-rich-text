@@ -20,7 +20,7 @@ export class MarkRendererHostDirective implements OnInit {
 
   constructor(
     private viewContainerRef: ViewContainerRef,
-    private componentRendererService: ComponentRendererService,
+    private componentRenderer: ComponentRendererService,
     private rendererProvider: RendererProviderService
   ) {}
 
@@ -38,7 +38,7 @@ export class MarkRendererHostDirective implements OnInit {
     } else {
       component = TextValueComponent;
     }
-    this.componentRendererService.render(
+    this.componentRenderer.render(
       this.viewContainerRef,
       component,
       this.node
