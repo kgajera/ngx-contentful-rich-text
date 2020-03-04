@@ -4,13 +4,13 @@ Angular renderer for the Contentful rich text field type.
 
 ## Installation
 
-Using [npm](http://npmjs.org/):
+Using [npm](https://www.npmjs.com/package/ngx-contentful-rich-text):
 
 ```sh
-npm install ngx-contentful-rich-text
+npm install ngx-contentful-rich-text --save
 ```
 
-Using [yarn](https://yarnpkg.com/):
+Using [yarn](https://yarnpkg.com/package/ngx-contentful-rich-text):
 
 ```sh
 yarn add ngx-contentful-rich-text
