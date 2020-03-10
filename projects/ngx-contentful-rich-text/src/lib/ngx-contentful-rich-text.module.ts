@@ -21,7 +21,6 @@ import { NgxContentfulRichTextComponent } from './ngx-contentful-rich-text.compo
   exports: [
     MarkRendererHostDirective,
     NgxContentfulRichTextComponent,
-    NodeRendererHostDirective,
   ],
 })
 export class NgxContentfulRichTextModule {}

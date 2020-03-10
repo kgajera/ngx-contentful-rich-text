@@ -6,7 +6,7 @@ import { NodeRenderer } from '../classes/node-renderer.class';
 export const CHILDREN =
   '<ngx-contentful-rich-text [nodes]="node.content"></ngx-contentful-rich-text>';
 
-export const DEFAULT_INLINE =
+const DEFAULT_INLINE =
   '<span>type: {{ node.nodeType }} id: {{ node.data.target.sys.id }}</span>';
 
 @Component({
