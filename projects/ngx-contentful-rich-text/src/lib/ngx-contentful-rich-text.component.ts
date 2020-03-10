@@ -31,7 +31,7 @@ import { RendererProviderService } from './services/renderer-provider.service';
         >
         </ng-container>
         <ng-template #textNode>
-          <ng-container ngxMarkRendererHost [node]="node"> </ng-container>
+          <ng-container ngxMarkRendererHost [node]="node"></ng-container>
         </ng-template>
       </ng-container>
     </ng-container>
