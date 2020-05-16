@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "format:check": "prettier --check \"projects/*/src/**/*.{html,scss,ts}\"",
+    "format:fix": "prettier --write \"projects/*/src/**/*.{html,scss,ts}\""  
   },
   "private": true,
   "dependencies": {

@@ -37,10 +37,6 @@ export class MarkRendererHostDirective implements OnInit {
     } else {
       component = TextValueComponent;
     }
-    this.componentRenderer.render(
-      this.viewContainerRef,
-      component,
-      this.node
-    );
+    this.componentRenderer.render(this.viewContainerRef, component, this.node);
   }
 }

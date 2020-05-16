@@ -18,9 +18,6 @@ import { NgxContentfulRichTextComponent } from './ngx-contentful-rich-text.compo
     TextValueComponent,
   ],
   imports: [CommonModule],
-  exports: [
-    MarkRendererHostDirective,
-    NgxContentfulRichTextComponent,
-  ],
+  exports: [MarkRendererHostDirective, NgxContentfulRichTextComponent],
 })
 export class NgxContentfulRichTextModule {}
