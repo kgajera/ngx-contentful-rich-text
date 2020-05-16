@@ -1,0 +1,59 @@
+version: 2.1
+
+var_1: &job_defaults
+  working_directory: ~/project
+  docker:
+    - image: circleci/node:12.16-browsers
+
+var_2: &cache_key node_modules-{{ .Branch }}-{{ checksum "package-lock.json" }}
+
+var_3: &restore_cache
+  restore_cache:
+    key: *cache_key
+
+var_4: &save_cache
+  save_cache:
+    key: *cache_key
+    paths:
+      - "node_modules"
+
+jobs:
+  build:
+    <<: *job_defaults
+    steps:
+      - checkout
+      - *restore_cache
+      - run: npm install
+      - *save_cache
+      - run: npm run build
+  lint:
+    <<: *job_defaults
+    steps:
+      - checkout
+      - *restore_cache
+      - run: npm run lint
+  format:
+    <<: *job_defaults
+    steps:
+      - checkout
+      - *restore_cache
+      - run: npm run format:check
+  test:
+    <<: *job_defaults
+    steps:
+      - checkout
+      - *restore_cache
+      - run: npm run test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
+workflows:
+  build-lint-format-test:
+    jobs:
+      - build
+      - lint:
+          requires:
+            - build
+      - format:
+          requires:
+            - build
+      - test:
+          requires:
+            - build
