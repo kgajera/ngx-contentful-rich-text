@@ -7,13 +7,7 @@ import {
   SimpleChanges,
   Type,
 } from '@angular/core';
-import {
-  BLOCKS,
-  Block,
-  Document,
-  INLINES,
-  Inline,
-} from '@contentful/rich-text-types';
+import { Block, Document, Inline } from '@contentful/rich-text-types';
 
 import { MarkRenderer } from './classes/mark-renderer.class';
 import { NodeRenderer } from './classes/node-renderer.class';
@@ -46,7 +40,7 @@ export class NgxContentfulRichTextComponent implements OnInit, OnChanges {
   @Input() nodes: Array<Block | Inline>;
 
   /** Custom renderers for block and inline nodes */
-  @Input() nodeRenderers: Record<Partial<BLOCKS | INLINES>, Type<NodeRenderer>>;
+  @Input() nodeRenderers: Record<string, Type<NodeRenderer>>;
 
   /** Custom renderers for marks */
   @Input() markRenderers: Record<string, Type<MarkRenderer>>;
