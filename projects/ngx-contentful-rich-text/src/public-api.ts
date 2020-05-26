@@ -9,5 +9,5 @@ export * from './lib/directives/mark-renderer-host.directive';
 export { MarkRenderer } from './lib/classes/mark-renderer.class';
 export * from './lib/classes/node-renderer.class';
 
-export { TEXT } from './lib/components/default-mark-renderer.component';
-export { CHILDREN } from './lib/components/default-node-renderer.component';
+export * from './lib/components/default-mark-renderer.component';
+export * from './lib/components/default-node-renderer.component';
