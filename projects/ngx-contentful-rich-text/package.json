@@ -1,6 +1,6 @@
 {
   "name": "ngx-contentful-rich-text",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Angular renderer for the Contentful rich text field type",
   "repository": {
     "type": "git",
@@ -23,8 +23,8 @@
     "@contentful/rich-text-types": "^14.0.0"
   },
   "peerDependencies": {
-    "@angular/common": "^9.0.0",
-    "@angular/core": "^9.0.0",
-    "tslib": "^1.10.0"
+    "@angular/common": ">=9.0.0",
+    "@angular/core": ">=9.0.0",
+    "tslib": ">=1.10.0"
   }
 }
