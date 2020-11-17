@@ -5,6 +5,7 @@ import {
   TestModuleMetadata,
   async,
 } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import {
   BLOCKS,
   Block,
@@ -35,8 +36,15 @@ const hasTextContent: (nodeType: string) => boolean = nodeType =>
  *
  * @param nodeType Type of node
  */
-const textContent: (nodeType: string) => string = nodeType =>
-  hasTextContent(nodeType) ? `${nodeType} works!` : '';
+const textContent: (nodeType: string, withLineBreaks?: boolean) => string = (
+  nodeType,
+  withLineBreaks
+) =>
+  hasTextContent(nodeType)
+    ? withLineBreaks
+      ? `${nodeType} works! \n another line \n third line`
+      : `${nodeType} works!`
+    : '';
 
 /**
  * Generate inline nodes for a parent block type
@@ -46,7 +54,8 @@ const textContent: (nodeType: string) => string = nodeType =>
  */
 function getInlines(
   nodeType: BLOCKS | INLINES,
-  marks: Array<Mark> = []
+  marks: Array<Mark> = [],
+  withLineBreaks: boolean = false
 ): Array<Block | Inline | Text> {
   switch (nodeType) {
     case BLOCKS.HR:
@@ -57,7 +66,7 @@ function getInlines(
         {
           nodeType: BLOCKS.LIST_ITEM,
           data: {},
-          content: getInlines(BLOCKS.LIST_ITEM, marks),
+          content: getInlines(BLOCKS.LIST_ITEM, marks, withLineBreaks),
         },
       ];
     default:
@@ -66,7 +75,7 @@ function getInlines(
           nodeType: 'text',
           data: {},
           marks,
-          value: textContent(nodeType),
+          value: textContent(nodeType, withLineBreaks),
         },
       ];
   }
@@ -75,14 +84,14 @@ function getInlines(
 /**
  * Generate a node for each block node type
  */
-function getAllBlocks(): Array<Block> {
+function getAllBlocks(withLineBreaks: boolean = false): Array<Block> {
   const blocks: Array<Block> = [];
   const blockTypes: Array<BLOCKS> = Object.values(BLOCKS);
   for (const block of blockTypes) {
     blocks.push({
       nodeType: block,
       data: {},
-      content: getInlines(block),
+      content: getInlines(block, [], withLineBreaks),
     });
   }
   return blocks;
@@ -134,13 +143,13 @@ describe('NgxContentfulRichTextComponent', () => {
         .then(() => {
           fixture = TestBed.createComponent(NgxContentfulRichTextComponent);
           component = fixture.componentInstance;
-          component.nodes = getAllBlocks();
+          component.nodes = getAllBlocks(true);
           fixture.detectChanges();
         });
     }));
 
     for (const block of Object.keys(BLOCK_TAG_MAP)) {
-      it(`should render ${block}`, () => {
+      it(`should render ${block} with line breaks`, () => {
         const parentElement: HTMLElement = fixture.nativeElement;
         const expectedTag: string = BLOCK_TAG_MAP[block];
         const blockElement: HTMLElement = parentElement.querySelector(
@@ -149,19 +158,22 @@ describe('NgxContentfulRichTextComponent', () => {
         expect(blockElement).toBeTruthy();
 
         if (hasTextContent(block)) {
-          expect(blockElement.textContent).toEqual(textContent(block));
+          expect(blockElement.textContent).toContain(textContent(block));
+          expect(blockElement.innerHTML).toContain('<br>');
         }
       });
     }
 
-    it(`should render ${BLOCKS.OL_LIST} and ${BLOCKS.LIST_ITEM}`, () => {
+    it(`should render ${BLOCKS.OL_LIST} and ${BLOCKS.LIST_ITEM} and accept line breaks`, () => {
       const parentElement: HTMLElement = fixture.nativeElement;
       const orderedListElement: HTMLOListElement = parentElement.querySelector(
         'ol'
       );
       expect(orderedListElement).toBeTruthy();
       const listElement: HTMLLIElement = orderedListElement.querySelector('li');
-      expect(listElement.textContent).toEqual(textContent(BLOCKS.LIST_ITEM));
+
+      expect(listElement.textContent).toContain(textContent(BLOCKS.LIST_ITEM));
+      expect(listElement.innerHTML).toContain('<br>');
     });
 
     it(`should render ${BLOCKS.UL_LIST} and ${BLOCKS.LIST_ITEM}`, () => {
@@ -173,7 +185,8 @@ describe('NgxContentfulRichTextComponent', () => {
       const listElement: HTMLLIElement = unorderedListElement.querySelector(
         'li'
       );
-      expect(listElement.textContent).toEqual(textContent(BLOCKS.LIST_ITEM));
+      expect(listElement.textContent).toContain(textContent(BLOCKS.LIST_ITEM));
+      expect(listElement.innerHTML).toContain('<br>');
     });
   });
 
