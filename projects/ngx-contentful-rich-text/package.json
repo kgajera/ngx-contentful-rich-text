@@ -20,11 +20,11 @@
     "url": "https://github.com/kgajera/ngx-contentful-rich-text/issues"
   },
   "dependencies": {
-    "@contentful/rich-text-types": "^14.0.0"
+    "@contentful/rich-text-types": "^14.0.0",
+    "tslib": "^2.0.0"
   },
   "peerDependencies": {
     "@angular/common": ">=9.0.0",
-    "@angular/core": ">=9.0.0",
-    "tslib": ">=1.10.0"
+    "@angular/core": ">=9.0.0"
   }
 }
