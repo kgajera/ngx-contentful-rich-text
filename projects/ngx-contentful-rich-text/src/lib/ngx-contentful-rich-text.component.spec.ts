@@ -3,7 +3,7 @@ import {
   ComponentFixture,
   TestBed,
   TestModuleMetadata,
-  async,
+  waitForAsync,
 } from '@angular/core/testing';
 import {
   BLOCKS,
@@ -128,16 +128,18 @@ describe('NgxContentfulRichTextComponent', () => {
       [BLOCKS.UL_LIST]: 'ul',
     };
 
-    beforeAll(async(() => {
-      TestBed.configureTestingModule(DEFAULT_TEST_MODULE)
-        .compileComponents()
-        .then(() => {
-          fixture = TestBed.createComponent(NgxContentfulRichTextComponent);
-          component = fixture.componentInstance;
-          component.nodes = getAllBlocks();
-          fixture.detectChanges();
-        });
-    }));
+    beforeAll(
+      waitForAsync(() => {
+        TestBed.configureTestingModule(DEFAULT_TEST_MODULE)
+          .compileComponents()
+          .then(() => {
+            fixture = TestBed.createComponent(NgxContentfulRichTextComponent);
+            component = fixture.componentInstance;
+            component.nodes = getAllBlocks();
+            fixture.detectChanges();
+          });
+      })
+    );
 
     for (const block of Object.keys(BLOCK_TAG_MAP)) {
       it(`should render ${block}`, () => {
