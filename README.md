@@ -69,13 +69,15 @@ export class AppComponent {
 You can also pass custom renderer components for both nodes and marks using the `nodeRenderers` and `markRenderers` optional inputs respectively like so:
 
 ```typescript
-import { Component, Type } from '@angular/core';
+import { Component } from '@angular/core';
 import { BLOCKS, MARKS, Document } from '@contentful/rich-text-types';
 import {
   CHILDREN,
   TEXT,
   MarkRenderer,
+  MarkRendererResolver,
   NodeRenderer,
+  NodeRendererResolver
 } from 'ngx-contentful-rich-text';
 
 @Component({
@@ -104,10 +106,10 @@ export class CustomParagraphComponent extends NodeRenderer {}
   `,
 })
 export class AppComponent {
-  nodeRenderers: Record<string, Type<NodeRenderer>> = {
+  nodeRenderers: Record<string, NodeRendererResolver> = {
     [BLOCKS.PARAGRAPH]: CustomParagraphComponent,
   };
-  markRenderers: Record<string, Type<MarkRenderer>> = {
+  markRenderers: Record<string, MarkRendererResolver> = {
     [MARKS.BOLD]: CustomBoldComponent,
   };
 
@@ -135,9 +137,9 @@ export class AppComponent {
 Last, but not least, you can pass a custom rendering component for an embedded entry:
 
 ```typescript
-import { Component, OnInit, Type } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BLOCKS, Document } from '@contentful/rich-text-types';
-import { NodeRenderer } from 'ngx-contentful-rich-text';
+import { NodeRenderer, NodeRendererResolver } from 'ngx-contentful-rich-text';
 
 @Component({
   template: `<div>{{ fields.title }}</div>`
@@ -160,8 +162,8 @@ export class CustomEmbeddedEntryComponent extends NodeRenderer implements OnInit
   `,
 })
 export class AppComponent {
-  nodeRenderers: Record<string, Type<NodeRenderer>> = {
-    [BLOCKS.EMBEDDED_ENTRY]: CustomEmbeddedEntryComponent
+  nodeRenderers: Record<string, NodeRendererResolver> = {
+    [BLOCKS.EMBEDDED_ENTRY]: (node) => CustomEmbeddedEntryComponent
   };
 
   document: Document = {

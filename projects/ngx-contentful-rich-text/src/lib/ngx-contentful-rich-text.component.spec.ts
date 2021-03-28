@@ -270,7 +270,7 @@ describe('NgxContentfulRichTextComponent', () => {
     });
   });
 
-  describe('rendering custom components', () => {
+  describe('custom renderer component', () => {
     let fixture: ComponentFixture<NgxContentfulRichTextComponent>;
 
     beforeAll(async () => {
@@ -291,6 +291,62 @@ describe('NgxContentfulRichTextComponent', () => {
           };
           component.markRenderers = {
             [MARKS.UNDERLINE]: CustomUnderlineRendererComponent,
+          };
+          component.nodes = [
+            {
+              nodeType: BLOCKS.HEADING_1,
+              data: {},
+              content: getInlines(BLOCKS.HEADING_1, [
+                { type: MARKS.UNDERLINE },
+              ]),
+            },
+          ];
+          fixture.detectChanges();
+        });
+    });
+
+    it(`should use custom ${BLOCKS.HEADING_1} component`, () => {
+      const customHeading1Element: HTMLElement = fixture.nativeElement.querySelector(
+        'div.h1'
+      );
+      expect(customHeading1Element).toBeTruthy();
+      expect(customHeading1Element.textContent).toEqual(
+        textContent(BLOCKS.HEADING_1)
+      );
+    });
+
+    it(`should use custom ${MARKS.UNDERLINE} component`, () => {
+      const customUnderlineElement: HTMLElement = fixture.nativeElement.querySelector(
+        'span.underline'
+      );
+      expect(customUnderlineElement).toBeTruthy();
+      expect(customUnderlineElement.textContent).toEqual(
+        textContent(BLOCKS.HEADING_1)
+      );
+    });
+  });
+
+  describe('custom renderer function', () => {
+    let fixture: ComponentFixture<NgxContentfulRichTextComponent>;
+
+    beforeAll(async () => {
+      TestBed.configureTestingModule({
+        declarations: [
+          CustomHeading1RendererComponent,
+          CustomUnderlineRendererComponent,
+        ],
+        imports: [NgxContentfulRichTextModule],
+      })
+        .compileComponents()
+        .then(() => {
+          fixture = TestBed.createComponent(NgxContentfulRichTextComponent);
+
+          const component = fixture.componentInstance;
+          component.nodeRenderers = {
+            [BLOCKS.HEADING_1]: () => CustomHeading1RendererComponent,
+          };
+          component.markRenderers = {
+            [MARKS.UNDERLINE]: () => CustomUnderlineRendererComponent,
           };
           component.nodes = [
             {

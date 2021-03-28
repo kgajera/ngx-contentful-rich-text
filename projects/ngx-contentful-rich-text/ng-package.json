@@ -4,5 +4,5 @@
   "lib": {
     "entryFile": "src/public-api.ts"
   },
-  "whitelistedNonPeerDependencies": ["@contentful/rich-text-types"]
+  "allowedNonPeerDependencies": ["@contentful/rich-text-types"]
 }

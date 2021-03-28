@@ -5,7 +5,6 @@ import {
   Type,
   ViewContainerRef,
 } from '@angular/core';
-import { Mark } from '@contentful/rich-text-types';
 
 import { MarkRenderer, Text } from '../classes/mark-renderer.class';
 import { TextValueComponent } from '../components/text-value.component';
@@ -32,8 +31,7 @@ export class MarkRendererHostDirective implements OnInit {
       this.node.markIndex += 1;
     }
     if (this.node.marks.length > this.node.markIndex) {
-      const mark: Mark = this.node.marks[this.node.markIndex];
-      component = this.rendererProvider.getMarkRenderer(mark.type);
+      component = this.rendererProvider.getMarkRenderer(this.node);
     } else {
       component = TextValueComponent;
     }
