@@ -5,7 +5,7 @@ var_1: &job_defaults
   docker:
     - image: circleci/node:12.16-browsers
 
-var_2: &cache_key node_modules-{{ .Branch }}-{{ checksum "package-lock.json" }}
+var_2: &cache_key node_modules-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
 var_3: &restore_cache
   restore_cache:
