@@ -25,7 +25,7 @@ export class NodeRendererHostDirective implements OnInit {
 
   ngOnInit() {
     const component: Type<NodeRenderer> = this.rendererProvider.getNodeRenderer(
-      this.node.nodeType
+      this.node
     );
     this.componentRenderer.render(this.viewContainerRef, component, this.node);
   }
