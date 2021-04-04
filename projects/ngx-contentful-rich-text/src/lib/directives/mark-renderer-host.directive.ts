@@ -26,7 +26,11 @@ export class MarkRendererHostDirective implements OnInit {
   ngOnInit() {
     let component: Type<MarkRenderer | TextValueComponent>;
     if (isNaN(this.node.markIndex)) {
-      this.node.markIndex = 0;
+      // Create new object because node object might not be extensible
+      this.node = {
+        ...this.node,
+        markIndex: 0,
+      };
     } else {
       this.node.markIndex += 1;
     }
