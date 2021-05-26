@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  HostBinding,
   Input,
   OnChanges,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
 import { Block, Document, Inline } from '@contentful/rich-text-types';
-
 import {
   MarkRendererResolver,
   NodeRendererResolver,
@@ -34,6 +34,8 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxContentfulRichTextComponent implements OnInit, OnChanges {
+  @HostBinding('class') class = 'ngx-contentful-rich-text';
+
   /** Document to render */
   @Input() document: Document;
 

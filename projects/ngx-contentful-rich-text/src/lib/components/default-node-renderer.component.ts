@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { BLOCKS, INLINES } from '@contentful/rich-text-types';
-
 import { NodeRenderer } from '../classes/node-renderer.class';
 
 export const CHILDREN =
@@ -47,6 +46,8 @@ const DEFAULT_INLINE =
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DefaultNodeRendererComponent extends NodeRenderer {
+  @HostBinding('class') class = 'default-node-renderer';
+
   BLOCKS: typeof BLOCKS = BLOCKS;
   INLINES: typeof INLINES = INLINES;
 }
