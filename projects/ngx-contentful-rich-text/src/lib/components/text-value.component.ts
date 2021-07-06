@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+} from '@angular/core';
 import { Text } from '@contentful/rich-text-types';
 
 @Component({
@@ -6,5 +11,7 @@ import { Text } from '@contentful/rich-text-types';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextValueComponent {
+  @HostBinding('class') class = 'text-value';
+
   @Input() node: Text;
 }

@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { MARKS } from '@contentful/rich-text-types';
-
 import { MarkRenderer } from '../classes/mark-renderer.class';
 
 export const TEXT = `<ng-container ngxMarkRendererHost [node]="node"></ng-container>`;
@@ -17,5 +16,7 @@ export const TEXT = `<ng-container ngxMarkRendererHost [node]="node"></ng-contai
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DefaultMarkRendererComponent extends MarkRenderer {
+  @HostBinding('class') class = 'default-mark-renderer';
+
   MARKS: typeof MARKS = MARKS;
 }
