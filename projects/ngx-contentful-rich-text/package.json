@@ -1,6 +1,6 @@
 {
   "name": "ngx-contentful-rich-text",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Angular renderer for the Contentful rich text field type",
   "repository": {
     "type": "git",
