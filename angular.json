@@ -28,9 +28,21 @@
             "tsConfig": "projects/ngx-contentful-rich-text/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-contentful-rich-text/karma.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ngx-contentful-rich-text/**/*.ts",
+              "projects/ngx-contentful-rich-text/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "ngx-contentful-rich-text"
+  "defaultProject": "ngx-contentful-rich-text",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
