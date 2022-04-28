@@ -3,7 +3,7 @@
 Angular renderer for the Contentful rich text field type.
 
 [![npm version](https://badge.fury.io/js/ngx-contentful-rich-text.svg)](https://badge.fury.io/js/ngx-contentful-rich-text)
-[![Test](https://github.com/kgajera/ngx-contentful-rich-text/actions/workflows/config.yml/badge.svg)](https://github.com/kgajera/ngx-contentful-rich-text/actions/workflows/config.yml)
+[![Test](https://github.com/kgajera/ngx-contentful-rich-text/actions/workflows/test.yml/badge.svg)](https://github.com/kgajera/ngx-contentful-rich-text/actions/workflows/test.yml)
 
 ## Installation
 
