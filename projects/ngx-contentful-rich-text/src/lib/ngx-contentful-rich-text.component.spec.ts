@@ -27,7 +27,7 @@ import { NgxContentfulRichTextModule } from './ngx-contentful-rich-text.module';
  *
  * @param nodeType Type of node
  */
-const hasTextContent: (nodeType: string) => boolean = nodeType =>
+const hasTextContent: (nodeType: string) => boolean = (nodeType) =>
   ![BLOCKS.HR, BLOCKS.OL_LIST, BLOCKS.UL_LIST].includes(nodeType as BLOCKS);
 
 /**
@@ -35,7 +35,7 @@ const hasTextContent: (nodeType: string) => boolean = nodeType =>
  *
  * @param nodeType Type of node
  */
-const textContent: (nodeType: string) => string = nodeType =>
+const textContent: (nodeType: string) => string = (nodeType) =>
   hasTextContent(nodeType) ? `${nodeType} works!` : '';
 
 /**
@@ -90,17 +90,13 @@ function getAllBlocks(): Array<Block> {
 
 /** Component to test custom block rendering */
 @Component({
-  template: `
-    <div class="h1">${CHILDREN}</div>
-  `,
+  template: ` <div class="h1">${CHILDREN}</div> `,
 })
 export class CustomHeading1RendererComponent extends NodeRenderer {}
 
 /** Component to test custom mark rendering */
 @Component({
-  template: `
-    <span class="underline">${TEXT}</span>
-  `,
+  template: ` <span class="underline">${TEXT}</span> `,
 })
 export class CustomUnderlineRendererComponent extends MarkRenderer {}
 
@@ -128,26 +124,23 @@ describe('NgxContentfulRichTextComponent', () => {
       [BLOCKS.UL_LIST]: 'ul',
     };
 
-    beforeAll(
-      waitForAsync(() => {
-        TestBed.configureTestingModule(DEFAULT_TEST_MODULE)
-          .compileComponents()
-          .then(() => {
-            fixture = TestBed.createComponent(NgxContentfulRichTextComponent);
-            component = fixture.componentInstance;
-            component.nodes = getAllBlocks();
-            fixture.detectChanges();
-          });
-      })
-    );
+    beforeAll(waitForAsync(() => {
+      TestBed.configureTestingModule(DEFAULT_TEST_MODULE)
+        .compileComponents()
+        .then(() => {
+          fixture = TestBed.createComponent(NgxContentfulRichTextComponent);
+          component = fixture.componentInstance;
+          component.nodes = getAllBlocks();
+          fixture.detectChanges();
+        });
+    }));
 
     for (const block of Object.keys(BLOCK_TAG_MAP)) {
       it(`should render ${block}`, () => {
         const parentElement: HTMLElement = fixture.nativeElement;
         const expectedTag: string = BLOCK_TAG_MAP[block];
-        const blockElement: HTMLElement = parentElement.querySelector(
-          expectedTag
-        );
+        const blockElement: HTMLElement =
+          parentElement.querySelector(expectedTag);
         expect(blockElement).toBeTruthy();
 
         if (hasTextContent(block)) {
@@ -158,9 +151,8 @@ describe('NgxContentfulRichTextComponent', () => {
 
     it(`should render ${BLOCKS.OL_LIST} and ${BLOCKS.LIST_ITEM}`, () => {
       const parentElement: HTMLElement = fixture.nativeElement;
-      const orderedListElement: HTMLOListElement = parentElement.querySelector(
-        'ol'
-      );
+      const orderedListElement: HTMLOListElement =
+        parentElement.querySelector('ol');
       expect(orderedListElement).toBeTruthy();
       const listElement: HTMLLIElement = orderedListElement.querySelector('li');
       expect(listElement.textContent).toEqual(textContent(BLOCKS.LIST_ITEM));
@@ -168,13 +160,11 @@ describe('NgxContentfulRichTextComponent', () => {
 
     it(`should render ${BLOCKS.UL_LIST} and ${BLOCKS.LIST_ITEM}`, () => {
       const parentElement: HTMLElement = fixture.nativeElement;
-      const unorderedListElement: HTMLUListElement = parentElement.querySelector(
-        'ul'
-      );
+      const unorderedListElement: HTMLUListElement =
+        parentElement.querySelector('ul');
       expect(unorderedListElement).toBeTruthy();
-      const listElement: HTMLLIElement = unorderedListElement.querySelector(
-        'li'
-      );
+      const listElement: HTMLLIElement =
+        unorderedListElement.querySelector('li');
       expect(listElement.textContent).toEqual(textContent(BLOCKS.LIST_ITEM));
     });
   });
@@ -243,9 +233,8 @@ describe('NgxContentfulRichTextComponent', () => {
 
     it(`should render multiple marks`, () => {
       const parentElement: HTMLElement = fixture.nativeElement;
-      const paragraphElement: HTMLParagraphElement = parentElement.querySelector(
-        'p'
-      );
+      const paragraphElement: HTMLParagraphElement =
+        parentElement.querySelector('p');
       expect(paragraphElement).toBeTruthy();
 
       const boldElement: HTMLElement = paragraphElement.querySelector(
@@ -306,9 +295,8 @@ describe('NgxContentfulRichTextComponent', () => {
     });
 
     it(`should use custom ${BLOCKS.HEADING_1} component`, () => {
-      const customHeading1Element: HTMLElement = fixture.nativeElement.querySelector(
-        'div.h1'
-      );
+      const customHeading1Element: HTMLElement =
+        fixture.nativeElement.querySelector('div.h1');
       expect(customHeading1Element).toBeTruthy();
       expect(customHeading1Element.textContent).toEqual(
         textContent(BLOCKS.HEADING_1)
@@ -316,9 +304,8 @@ describe('NgxContentfulRichTextComponent', () => {
     });
 
     it(`should use custom ${MARKS.UNDERLINE} component`, () => {
-      const customUnderlineElement: HTMLElement = fixture.nativeElement.querySelector(
-        'span.underline'
-      );
+      const customUnderlineElement: HTMLElement =
+        fixture.nativeElement.querySelector('span.underline');
       expect(customUnderlineElement).toBeTruthy();
       expect(customUnderlineElement.textContent).toEqual(
         textContent(BLOCKS.HEADING_1)
@@ -362,9 +349,8 @@ describe('NgxContentfulRichTextComponent', () => {
     });
 
     it(`should use custom ${BLOCKS.HEADING_1} component`, () => {
-      const customHeading1Element: HTMLElement = fixture.nativeElement.querySelector(
-        'div.h1'
-      );
+      const customHeading1Element: HTMLElement =
+        fixture.nativeElement.querySelector('div.h1');
       expect(customHeading1Element).toBeTruthy();
       expect(customHeading1Element.textContent).toEqual(
         textContent(BLOCKS.HEADING_1)
@@ -372,9 +358,8 @@ describe('NgxContentfulRichTextComponent', () => {
     });
 
     it(`should use custom ${MARKS.UNDERLINE} component`, () => {
-      const customUnderlineElement: HTMLElement = fixture.nativeElement.querySelector(
-        'span.underline'
-      );
+      const customUnderlineElement: HTMLElement =
+        fixture.nativeElement.querySelector('span.underline');
       expect(customUnderlineElement).toBeTruthy();
       expect(customUnderlineElement.textContent).toEqual(
         textContent(BLOCKS.HEADING_1)

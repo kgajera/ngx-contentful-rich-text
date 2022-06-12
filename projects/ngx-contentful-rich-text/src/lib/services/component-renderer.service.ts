@@ -21,9 +21,8 @@ export class ComponentRendererService {
     component: Type<NodeRenderer | MarkRenderer | TextValueComponent>,
     node: Block | Inline | Text
   ): void {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-      component
-    );
+    const componentFactory =
+      this.componentFactoryResolver.resolveComponentFactory(component);
     viewContainerRef.clear();
     const componentRef = viewContainerRef.createComponent(componentFactory);
     componentRef.instance.node = node;
