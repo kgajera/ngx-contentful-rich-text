@@ -21,7 +21,7 @@ export class MarkRendererHostDirective implements OnInit {
     private viewContainerRef: ViewContainerRef,
     private componentRenderer: ComponentRendererService,
     private rendererProvider: RendererProviderService
-  ) { }
+  ) {}
 
   ngOnInit() {
     const render = (component: Type<MarkRenderer | TextValueComponent>) =>
