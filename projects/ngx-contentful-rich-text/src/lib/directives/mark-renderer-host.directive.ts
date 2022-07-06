@@ -21,10 +21,16 @@ export class MarkRendererHostDirective implements OnInit {
     private viewContainerRef: ViewContainerRef,
     private componentRenderer: ComponentRendererService,
     private rendererProvider: RendererProviderService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    let component: Type<MarkRenderer | TextValueComponent>;
+    const render = (component: Type<MarkRenderer | TextValueComponent>) =>
+      this.componentRenderer.render(
+        this.viewContainerRef,
+        component,
+        this.node
+      );
+
     if (isNaN(this.node.markIndex)) {
       // Create new object because node object might not be extensible
       this.node = {
@@ -35,10 +41,9 @@ export class MarkRendererHostDirective implements OnInit {
       this.node.markIndex += 1;
     }
     if (this.node.marks.length > this.node.markIndex) {
-      component = this.rendererProvider.getMarkRenderer(this.node);
+      this.rendererProvider.getMarkRenderer(this.node).then(render);
     } else {
-      component = TextValueComponent;
+      render(TextValueComponent);
     }
-    this.componentRenderer.render(this.viewContainerRef, component, this.node);
   }
 }

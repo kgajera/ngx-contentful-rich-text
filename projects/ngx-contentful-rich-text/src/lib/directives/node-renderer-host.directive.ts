@@ -1,13 +1,6 @@
-import {
-  Directive,
-  Input,
-  OnInit,
-  Type,
-  ViewContainerRef,
-} from '@angular/core';
+import { Directive, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { Block, Inline } from '@contentful/rich-text-types';
 
-import { NodeRenderer } from '../classes/node-renderer.class';
 import { ComponentRendererService } from '../services/component-renderer.service';
 import { RendererProviderService } from '../services/renderer-provider.service';
 
@@ -24,9 +17,14 @@ export class NodeRendererHostDirective implements OnInit {
   ) {}
 
   ngOnInit() {
-    const component: Type<NodeRenderer> = this.rendererProvider.getNodeRenderer(
-      this.node
-    );
-    this.componentRenderer.render(this.viewContainerRef, component, this.node);
+    this.rendererProvider
+      .getNodeRenderer(this.node)
+      .then((component) =>
+        this.componentRenderer.render(
+          this.viewContainerRef,
+          component,
+          this.node
+        )
+      );
   }
 }

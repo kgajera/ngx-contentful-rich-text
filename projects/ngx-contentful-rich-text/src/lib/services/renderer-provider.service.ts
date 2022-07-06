@@ -3,8 +3,6 @@ import { Block, Inline } from '@contentful/rich-text-types';
 
 import { MarkRenderer, Text } from '../classes/mark-renderer.class';
 import { NodeRenderer } from '../classes/node-renderer.class';
-import { DefaultMarkRendererComponent } from '../components/default-mark-renderer.component';
-import { DefaultNodeRendererComponent } from '../components/default-node-renderer.component';
 
 export type NodeRendererFunction = (node: Block | Inline) => Type<NodeRenderer>;
 export type NodeRendererResolver = Type<NodeRenderer> | NodeRendererFunction;
@@ -19,7 +17,7 @@ export class RendererProviderService {
   private nodeRenderers: Record<string, NodeRendererResolver> = {};
   private markRenderers: Record<string, MarkRendererResolver> = {};
 
-  getMarkRenderer(node: Text): Type<MarkRenderer> {
+  async getMarkRenderer(node: Text): Promise<Type<MarkRenderer>> {
     const mark = node.marks[node.markIndex];
     const resolver = this.markRenderers[mark.type];
     let renderer: Type<MarkRenderer>;
@@ -28,10 +26,16 @@ export class RendererProviderService {
     } catch (error) {
       renderer = resolver as Type<MarkRenderer>;
     }
-    return renderer || DefaultMarkRendererComponent;
+    if (!renderer) {
+      const { DefaultMarkRendererComponent } = await import(
+        '../components/default-mark-renderer.component'
+      );
+      renderer = DefaultMarkRendererComponent;
+    }
+    return renderer;
   }
 
-  getNodeRenderer(node: Block | Inline): Type<NodeRenderer> {
+  async getNodeRenderer(node: Block | Inline): Promise<Type<NodeRenderer>> {
     const resolver = this.nodeRenderers[node.nodeType];
     let renderer: Type<NodeRenderer>;
     try {
@@ -39,7 +43,13 @@ export class RendererProviderService {
     } catch (error) {
       renderer = resolver as Type<NodeRenderer>;
     }
-    return renderer || DefaultNodeRendererComponent;
+    if (!renderer) {
+      const { DefaultNodeRendererComponent } = await import(
+        '../components/default-node-renderer.component'
+      );
+      renderer = DefaultNodeRendererComponent;
+    }
+    return renderer;
   }
 
   setNodeRenderers(customRenderers: Record<string, NodeRendererResolver>) {
