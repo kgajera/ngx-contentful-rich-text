@@ -12,9 +12,4 @@ export * from './lib/classes/node-renderer.class';
 export * from './lib/components/default-mark-renderer.component';
 export * from './lib/components/default-node-renderer.component';
 
-export {
-  MarkRendererFunction,
-  MarkRendererResolver,
-  NodeRendererFunction,
-  NodeRendererResolver,
-} from './lib/services/renderer-provider.service';
+export * from './lib/services/renderer-provider.service';
