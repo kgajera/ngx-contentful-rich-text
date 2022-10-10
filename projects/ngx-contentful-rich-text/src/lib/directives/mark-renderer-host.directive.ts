@@ -7,29 +7,26 @@ import {
 } from '@angular/core';
 
 import { MarkRenderer, Text } from '../classes/mark-renderer.class';
+import { RendererHost } from '../classes/renderer-host.class';
 import { TextValueComponent } from '../components/text-value.component';
-import { ComponentRendererService } from '../services/component-renderer.service';
 import { RendererProviderService } from '../services/renderer-provider.service';
 
 @Directive({
   selector: '[ngxMarkRendererHost]',
 })
-export class MarkRendererHostDirective implements OnInit {
+export class MarkRendererHostDirective extends RendererHost implements OnInit {
   @Input() node: Text;
 
   constructor(
     private viewContainerRef: ViewContainerRef,
-    private componentRenderer: ComponentRendererService,
     private rendererProvider: RendererProviderService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     const render = (component: Type<MarkRenderer | TextValueComponent>) =>
-      this.componentRenderer.render(
-        this.viewContainerRef,
-        component,
-        this.node
-      );
+      this.render(this.viewContainerRef, component, this.node);
 
     if (isNaN(this.node.markIndex)) {
       // Create new object because node object might not be extensible

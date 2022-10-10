@@ -1,16 +1,10 @@
-import { Injectable, Type, ViewContainerRef } from '@angular/core';
+import { ViewContainerRef, Type } from '@angular/core';
 import { Block, Inline, Text } from '@contentful/rich-text-types';
-
 import { MarkRenderer } from '../classes/mark-renderer.class';
 import { NodeRenderer } from '../classes/node-renderer.class';
 import { TextValueComponent } from '../components/text-value.component';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ComponentRendererService {
-  constructor() {}
-
+export abstract class RendererHost {
   render(
     viewContainerRef: ViewContainerRef,
     component: Type<NodeRenderer | MarkRenderer | TextValueComponent>,
