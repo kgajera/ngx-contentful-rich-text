@@ -28,7 +28,7 @@ jobs:
           cache: 'pnpm'
 
       - run: pnpm install
-      - run: pnpm build
+      - run: pnpm build -c production
       - run: pnpm format:check
       - run: pnpm lint
       - run: pnpm test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
