@@ -3,7 +3,7 @@
 Angular renderer for the Contentful rich text field type.
 
 [![npm version](https://badge.fury.io/js/ngx-contentful-rich-text.svg)](https://badge.fury.io/js/ngx-contentful-rich-text)
-[![CircleCI](https://circleci.com/gh/kgajera/ngx-contentful-rich-text.svg?style=svg)](https://circleci.com/gh/kgajera/ngx-contentful-rich-text)
+[![Test](https://github.com/kgajera/ngx-contentful-rich-text/actions/workflows/test.yml/badge.svg)](https://github.com/kgajera/ngx-contentful-rich-text/actions/workflows/test.yml)
 
 ## Installation
 
@@ -77,7 +77,7 @@ import {
   MarkRenderer,
   MarkRendererResolver,
   NodeRenderer,
-  NodeRendererResolver
+  NodeRendererResolver,
 } from 'ngx-contentful-rich-text';
 
 @Component({
