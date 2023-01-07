@@ -1,15 +1,4 @@
-<div align="center">
-  <img src="website/static/img/logo.png">
-</div>
-
-<p align="center">
-  Angular renderer for the Contentful rich text field type.
-</p>
-
-<p align="center">
-  <a href="https://www.npmjs.com/package/ngx-contentful-rich-text"><img src="https://badge.fury.io/js/ngx-contentful-rich-text.svg" alt="NPM" /></a>
-  <a href="https://github.com/kgajera/ngx-contentful-rich-text/actions/workflows/test.yml"><img src="https://github.com/kgajera/ngx-contentful-rich-text/actions/workflows/test.yml/badge.svg" alt="Test" /></a>
-</p>
+# Angular Renderer for Contentful Rich Text
 
 ## Installation
 
@@ -83,16 +72,12 @@ import {
 } from 'ngx-contentful-rich-text';
 
 @Component({
-  template: `
-    <p class="bold">${TEXT}</p>
-  `,
+  template: `<p class="bold">${TEXT}</p>`,
 })
 export class CustomBoldComponent extends MarkRenderer {}
 
 @Component({
-  template: `
-    <p class="text-center">${CHILDREN}</p>
-  `,
+  template: `<p class="text-center">${CHILDREN}</p>`,
 })
 export class CustomParagraphComponent extends NodeRenderer {}
 
