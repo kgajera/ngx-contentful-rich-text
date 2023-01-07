@@ -11,24 +11,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
-
-      - uses: pnpm/action-setup@v2.2.2
-        with:
-          version: 7
-
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-          cache: 'pnpm'
-
-      - run: pnpm install
-      - run: pnpm build -c production
-      - run: pnpm format:check
-      - run: pnpm lint
-      - run: pnpm test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
+          node-version: 18
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build -c production
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm test -- --watch=false --progress=false --browsers=ChromeHeadlessCI
