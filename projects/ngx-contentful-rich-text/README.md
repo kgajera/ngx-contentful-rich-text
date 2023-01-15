@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="website/static/img/logo.png">
+  <img src="https://raw.githubusercontent.com/kgajera/ngx-contentful-rich-text/main/website/static/img/logo.png" alt="Logo" />
 </div>
 
 <p align="center">
