@@ -4,12 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - website/**
-
-defaults:
-  run:
-    working-directory: website
 
 jobs:
   deploy:
@@ -22,11 +16,27 @@ jobs:
           node-version: 18
           cache: npm
 
+      - name: Generate Docublitz website
+        run: |
+          npx docublitz \
+            --githubOrganization=kgajera \
+            --githubProject=ngx-contentful-rich-text \
+            --tagline="Angular Renderer for Contentful Rich Text" \
+            --subheading="Render your rich text documents using Angular components" \
+            --stackBlitzId=ngx-contentful-rich-text \
+            --installCommand="npm install ngx-contentful-rich-text" \
+            --primaryColorLight=#003cbe \
+            --primaryColorDark=#3ab2e6 \
+            --favicon=https://raw.githubusercontent.com/kgajera/ngx-contentful-rich-text/gh-pages-assets/favicon.ico \
+            --logo=https://raw.githubusercontent.com/kgajera/ngx-contentful-rich-text/gh-pages-assets/logo.png
+
       - name: Install dependencies
-        run: npm ci
+        run: npm install
+        working-directory: website
 
       - name: Build website
         run: npm run build
+        working-directory: website
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
