@@ -17,18 +17,7 @@ jobs:
           cache: npm
 
       - name: Generate Docublitz website
-        run: |
-          npx docublitz@latest \
-            --githubOrganization=kgajera \
-            --githubProject=ngx-contentful-rich-text \
-            --tagline="Angular Renderer for Contentful Rich Text" \
-            --subheading="Render your rich text documents using Angular components" \
-            --stackBlitzId=ngx-contentful-rich-text \
-            --installCommand="npm install ngx-contentful-rich-text" \
-            --primaryColorLight=#003cbe \
-            --primaryColorDark=#3ab2e6 \
-            --favicon=https://raw.githubusercontent.com/kgajera/ngx-contentful-rich-text/gh-pages-assets/favicon.ico \
-            --logo=https://raw.githubusercontent.com/kgajera/ngx-contentful-rich-text/gh-pages-assets/logo.png
+        run: npx docublitz@latest
 
       - name: Install dependencies
         run: npm install

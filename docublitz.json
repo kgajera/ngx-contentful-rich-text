@@ -1,0 +1,12 @@
+{
+  "favicon": "https://raw.githubusercontent.com/kgajera/ngx-contentful-rich-text/gh-pages-assets/favicon.ico",
+  "githubOwner": "kgajera",
+  "githubRepo": "ngx-contentful-rich-text",
+  "installCommand": "npm install ngx-contentful-rich-text",
+  "logo": "https://raw.githubusercontent.com/kgajera/ngx-contentful-rich-text/gh-pages-assets/logo.png",
+  "primaryColorDark": "#3ab2e6",
+  "primaryColorLight": "#003cbe",
+  "stackBlitzId": "ngx-contentful-rich-text",
+  "subheading": "Render your rich text documents using Angular components",
+  "tagline": "Angular Renderer for Contentful Rich Text"
+}
