@@ -21,7 +21,7 @@
     "@angular/platform-browser": "~15.0.4",
     "@angular/platform-browser-dynamic": "~15.0.4",
     "@angular/router": "~15.0.4",
-    "@contentful/rich-text-types": "^15.11.1",
+    "@contentful/rich-text-types": "^16.3.0",
     "rxjs": "~6.6.6",
     "tslib": "^2.4.0",
     "zone.js": "~0.11.4"
